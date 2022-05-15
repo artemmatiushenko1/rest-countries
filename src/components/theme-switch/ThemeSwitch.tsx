@@ -1,8 +1,26 @@
 import { Button } from '@mui/material';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+// import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import React from 'react';
+import { useTheme } from '@mui/material';
 
 const ThemeSwitch = () => {
-  return <Button variant="contained">Dark Mode</Button>;
+  const { typography, palette } = useTheme();
+  console.log(typography);
+
+  return (
+    <Button
+      startIcon={<DarkModeIcon />}
+      variant="text"
+      sx={{
+        color: palette.text.primary,
+        textTransform: 'none',
+        fontWeight: typography.fontWeightBold,
+      }}
+    >
+      Dark Mode
+    </Button>
+  );
 };
 
 export default ThemeSwitch;

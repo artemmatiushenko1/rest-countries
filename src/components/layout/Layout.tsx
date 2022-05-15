@@ -1,3 +1,4 @@
+import Container from 'components/container/Container';
 import Header from 'components/header/Header';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
@@ -5,8 +6,10 @@ import { Outlet } from 'react-router-dom';
 const Layout = () => {
   return (
     <div>
-      <Header></Header>
-      <Outlet />
+      <Header />
+      <Container>
+        <Outlet />
+      </Container>
     </div>
   );
 };

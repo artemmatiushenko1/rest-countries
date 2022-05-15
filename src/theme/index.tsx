@@ -4,6 +4,8 @@ import { createTheme } from '@mui/material';
 import React, { useMemo } from 'react';
 import { overrides } from './overrides';
 import typography from './typography';
+import { darkPalette, lightPalette } from './palette';
+import GlobalStyles from './GlobalStyles';
 
 interface ThemeConfigProps {
   children: React.ReactNode;
@@ -14,15 +16,18 @@ const ThemeConfig: React.FC<ThemeConfigProps> = ({ children }) => {
     () => ({
       components: overrides,
       typography,
+      palette: darkPalette,
     }),
     []
   );
 
   const theme = createTheme(themeOptions);
+  console.log(theme);
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <GlobalStyles />
       {children}
     </ThemeProvider>
   );

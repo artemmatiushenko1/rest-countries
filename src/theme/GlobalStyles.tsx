@@ -1,7 +1,8 @@
 import { GlobalStyles as GlobalThemeStyles, useTheme } from '@mui/material';
 
 const GlobalStyles = () => {
-  const { typography } = useTheme();
+  const { typography, palette } = useTheme();
+  console.log(palette);
 
   return (
     <GlobalThemeStyles
@@ -19,6 +20,7 @@ const GlobalStyles = () => {
           height: '100%',
           fontWeight: typography.fontWeightRegular,
           fontFamily: typography.fontFamily,
+          backgroundColor: palette.primary.main,
         },
         '#root': {
           width: '100%',
