@@ -22,7 +22,6 @@ const ThemeConfig: React.FC<ThemeConfigProps> = ({ children }) => {
   );
 
   const theme = createTheme(themeOptions);
-  console.log(theme);
 
   return (
     <ThemeProvider theme={theme}>

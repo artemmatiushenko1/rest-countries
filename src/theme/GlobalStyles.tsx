@@ -2,7 +2,6 @@ import { GlobalStyles as GlobalThemeStyles, useTheme } from '@mui/material';
 
 const GlobalStyles = () => {
   const { typography, palette } = useTheme();
-  console.log(palette);
 
   return (
     <GlobalThemeStyles

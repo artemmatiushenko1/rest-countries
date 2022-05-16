@@ -6,7 +6,6 @@ import { useTheme } from '@mui/material';
 
 const ThemeSwitch = () => {
   const { typography, palette } = useTheme();
-  console.log(typography);
 
   return (
     <Button
