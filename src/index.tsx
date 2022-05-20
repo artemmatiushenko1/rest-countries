@@ -10,10 +10,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <Router>
-      <ThemeConfig>
+    <ThemeConfig>
+      <Router>
         <App />
-      </ThemeConfig>
-    </Router>
+      </Router>
+    </ThemeConfig>
   </React.StrictMode>
 );

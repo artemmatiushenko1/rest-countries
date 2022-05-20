@@ -16,7 +16,7 @@ const ThemeConfig: React.FC<ThemeConfigProps> = ({ children }) => {
     () => ({
       components: overrides,
       typography,
-      palette: darkPalette,
+      palette: lightPalette,
     }),
     []
   );

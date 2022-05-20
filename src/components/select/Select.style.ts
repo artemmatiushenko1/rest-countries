@@ -9,7 +9,7 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => {
     maxWidth: '200px',
     width: '100%',
     borderRadius: '5px',
-    boxShadow: '0px 2px 4px -2px rgb(0 0 0 / 5%)',
+    boxShadow: '0px 1px 10px -2px rgb(0, 0, 0, 0.05)',
     fontSize: '14px',
     lineHeight: '22.94px',
 

@@ -7,7 +7,7 @@ export const Input = styled(MuiTextField)(({ theme }) => {
     maxWidth: '480px',
     backgroundColor: theme.palette.secondary.main,
     borderRadius: '5px',
-    boxShadow: '0px 2px 4px -2px rgb(0 0 0 / 5%)',
+    boxShadow: '0px 1px 10px -2px rgb(0, 0, 0, 0.05)',
     '& .MuiInputBase-root': {
       padding: '0 0 0 30px',
       '& .MuiInputAdornment-root': {

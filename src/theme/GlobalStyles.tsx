@@ -8,6 +8,7 @@ const GlobalStyles = () => {
       styles={{
         '*': {
           margin: 0,
+          padding: 0,
         },
         html: {
           width: '100%',

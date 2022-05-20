@@ -15,6 +15,7 @@ const ThemeSwitch = () => {
         color: palette.text.primary,
         textTransform: 'none',
         fontWeight: typography.fontWeightBold,
+        fontSize: '15px',
       }}
     >
       Dark Mode
