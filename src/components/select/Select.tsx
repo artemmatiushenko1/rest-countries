@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import {
   Select as MuiSelect,
   MenuItem,
@@ -16,7 +16,12 @@ interface ISelectProps {
   onChange: (e: SelectChangeEvent) => void;
 }
 
-const Select = ({ options, placeholder, value, onChange }: ISelectProps) => {
+const Select: FC<ISelectProps> = ({
+  options,
+  placeholder,
+  value,
+  onChange,
+}) => {
   const { palette } = useTheme();
 
   return (

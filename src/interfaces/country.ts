@@ -14,7 +14,7 @@ export interface ICountry {
   population: number;
   region: string;
   subregion: string;
-  capital: string;
+  capital: string[];
   flag: string;
   altSpellings: string[];
   tld: string[];

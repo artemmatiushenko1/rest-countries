@@ -1,3 +1,4 @@
+import Property from 'components/property/Property';
 import React from 'react';
 import * as S from './CountryItem.style';
 
@@ -23,23 +24,17 @@ const CountryItem: React.FC<CountryItemProps> = ({
       </S.FlagWrapper>
       <S.Details>
         <S.Name title={name}>{name}</S.Name>
-        <S.PropertiesList>
-          <S.Property>
-            <p>
-              Population: <span>{population}</span>
-            </p>
-          </S.Property>
-          <S.Property>
-            <p>
-              Region: <span>{region}</span>
-            </p>
-          </S.Property>
-          <S.Property>
-            <p>
-              Capital: <span>{capital}</span>
-            </p>
-          </S.Property>
-        </S.PropertiesList>
+        <S.List>
+          <S.Item>
+            <Property name="Population" value={population} />
+          </S.Item>
+          <S.Item>
+            <Property name="Region" value={region} />
+          </S.Item>
+          <S.Item>
+            <Property name="Capital" value={capital} />
+          </S.Item>
+        </S.List>
       </S.Details>
     </S.Card>
   );

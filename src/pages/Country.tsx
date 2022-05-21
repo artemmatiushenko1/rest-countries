@@ -1,7 +1,7 @@
-import React from 'react';
+import CountryPage from 'components/country-page/CountryPage';
 
 const Country = () => {
-  return <div>Country</div>;
+  return <CountryPage />;
 };
 
 export default Country;

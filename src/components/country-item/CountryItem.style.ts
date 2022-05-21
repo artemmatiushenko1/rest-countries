@@ -37,20 +37,16 @@ export const Details = styled('div')(() => ({
   padding: '24px 25px 42px 25px',
 }));
 
-export const PropertiesList = styled('ul')(() => {
+export const List = styled('ul')(() => {
   return {
     listStyle: 'none',
     paddingTop: '13px',
   };
 });
 
-export const Property = styled('li')(() => {
+export const Item = styled('li')(() => {
   return {
     fontSize: '14px',
-    fontWeight: 600,
-    span: {
-      fontWeight: 400,
-    },
     '&:not(:last-child)': {
       marginBottom: '3px',
     },

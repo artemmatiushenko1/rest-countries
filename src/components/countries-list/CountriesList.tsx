@@ -18,7 +18,7 @@ const CountriesList: React.FC<CountriesListProps> = ({ countries }) => {
             flag={flag}
             population={population}
             region={region}
-            capital={capital}
+            capital={capital && capital.join(', ')}
           />
         );
       })}
