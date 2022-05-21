@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { BrowserRouter as Router } from 'react-router-dom';
 import ThemeConfig from 'theme';
+import { Provider } from 'react-redux';
+import { store } from 'features/store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -10,10 +12,12 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <ThemeConfig>
-      <Router>
-        <App />
-      </Router>
-    </ThemeConfig>
+    <Provider store={store}>
+      <ThemeConfig>
+        <Router>
+          <App />
+        </Router>
+      </ThemeConfig>
+    </Provider>
   </React.StrictMode>
 );
