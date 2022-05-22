@@ -10,15 +10,15 @@ interface CountriesListProps {
 const CountriesList: React.FC<CountriesListProps> = ({ countries }) => {
   return (
     <S.Grid>
-      {countries.map(({ name, flag, population, region, capital }) => {
+      {countries.map(({ name, flags, population, region, capital }) => {
         return (
           <CountryItem
             key={name}
             name={name}
-            flag={flag}
+            flags={flags}
             population={population}
             region={region}
-            capital={capital && capital.join(', ')}
+            capital={capital}
           />
         );
       })}

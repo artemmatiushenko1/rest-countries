@@ -24,23 +24,8 @@ const HomePage = () => {
       const response = await axios.get<ICountry[]>(
         process.env.REACT_APP_API_URL as string
       );
-      const transformedData = response.data?.map((country: any) => {
-        return {
-          name: country.name.common,
-          nativeName: country?.name.nativeName,
-          population: country?.population,
-          region: country?.region,
-          subregion: country?.subregion,
-          capital: country?.capital,
-          flag: country?.flags.svg,
-          altSpellings: country?.altSpellings,
-          tld: country?.tld,
-          currencies: country?.currencies,
-          languages: country?.languages,
-          borders: country?.borders,
-        };
-      });
-      setAllCountries(transformedData);
+      console.log(response.data);
+      setAllCountries(response.data);
     };
     fetchCountries();
   }, []);

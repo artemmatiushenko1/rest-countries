@@ -1,24 +1,33 @@
-interface currencyInfo {
+export interface ICurrency {
   name: string;
   symbol: string;
+  code: string;
 }
 
-interface nativeNameInfo {
-  official: string;
-  common: string;
+export interface ILanguage {
+  iso639_1: string;
+  iso639_2: string;
+  name: string;
+  nativeName: string;
+}
+
+export interface IFlags {
+  svg: string;
+  png: string;
 }
 
 export interface ICountry {
   name: string;
-  nativeName: Record<string, nativeNameInfo>;
+  alpha3Code: string;
+  nativeName: string;
   population: number;
   region: string;
   subregion: string;
-  capital: string[];
-  flag: string;
+  capital: string;
+  flags: IFlags;
   altSpellings: string[];
-  tld: string[];
-  currencies: Record<string, currencyInfo>;
-  languages: Record<string, string>;
+  topLevelDomain: string[];
+  currencies: ICurrency[];
+  languages: ILanguage[];
   borders: string[];
 }

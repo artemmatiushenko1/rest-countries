@@ -5,32 +5,78 @@ import Property from 'components/property/Property';
 import * as S from './CountryPage.style';
 import CountryLink from 'components/country-link/CountryLink';
 
-const country: ICountry = {
-  name: 'Ukraine',
-  nativeName: {
-    ukr: {
-      official: 'Україна',
-      common: 'Україна',
+const country = {
+  name: 'Afghanistan',
+  topLevelDomain: ['.af'],
+  alpha2Code: 'AF',
+  alpha3Code: 'AFG',
+  callingCodes: ['93'],
+  capital: 'Kabul',
+  altSpellings: ['AF', 'Afġānistān'],
+  subregion: 'Southern Asia',
+  region: 'Asia',
+  population: 40218234,
+  latlng: [33, 65],
+  demonym: 'Afghan',
+  area: 652230,
+  timezones: ['UTC+04:30'],
+  borders: ['IRN', 'PAK', 'TKM', 'UZB', 'TJK', 'CHN'],
+  nativeName: 'افغانستان',
+  numericCode: '004',
+  flags: {
+    svg: 'https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_the_Taliban.svg',
+    png: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Flag_of_the_Taliban.svg/320px-Flag_of_the_Taliban.svg.png',
+  },
+  currencies: [
+    {
+      code: 'AFN',
+      name: 'Afghan afghani',
+      symbol: '؋',
     },
-  },
-  population: 44134693,
-  region: 'Europe',
-  subregion: 'Eastern Europe',
-  capital: ['Kyiv'],
-  flag: 'https://flagcdn.com/ua.svg',
-  altSpellings: ['UA', 'Ukrayina'],
-  tld: ['.ua', '.укр'],
-  currencies: {
-    UAH: {
-      name: 'Ukrainian hryvnia',
-      symbol: '₴',
+  ],
+  languages: [
+    {
+      iso639_1: 'ps',
+      iso639_2: 'pus',
+      name: 'Pashto',
+      nativeName: 'پښتو',
     },
+    {
+      iso639_1: 'uz',
+      iso639_2: 'uzb',
+      name: 'Uzbek',
+      nativeName: 'Oʻzbek',
+    },
+    {
+      iso639_1: 'tk',
+      iso639_2: 'tuk',
+      name: 'Turkmen',
+      nativeName: 'Türkmen',
+    },
+  ],
+  translations: {
+    br: 'Afeganistão',
+    pt: 'Afeganistão',
+    nl: 'Afghanistan',
+    hr: 'Afganistan',
+    fa: 'افغانستان',
+    de: 'Afghanistan',
+    es: 'Afganistán',
+    fr: 'Afghanistan',
+    ja: 'アフガニスタン',
+    it: 'Afghanistan',
+    hu: 'Afganisztán',
   },
-  languages: {
-    ukr: 'Ukrainian',
-  },
-  borders: ['BLR', 'HUN', 'MDA', 'POL', 'ROU', 'RUS', 'SVK'],
-};
+  flag: 'https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_the_Taliban.svg',
+  regionalBlocs: [
+    {
+      acronym: 'SAARC',
+      name: 'South Asian Association for Regional Cooperation',
+    },
+  ],
+  cioc: 'AFG',
+  independent: true,
+} as ICountry;
 
 const CountryPage = () => {
   return (
@@ -40,17 +86,14 @@ const CountryPage = () => {
       </S.BackButton>
       <S.CountryContainer>
         <S.FlagWrapper>
-          <img src={country.flag} alt="" />
+          <img src={country.flags.svg} alt="" />
         </S.FlagWrapper>
         <S.Details>
           <S.Name>{country.name}</S.Name>
           <S.PropertiesWrapper>
             <S.List>
               <S.Item>
-                <Property
-                  name="Native name"
-                  value={country.nativeName.ukr.official}
-                />
+                <Property name="Native name" value={country.nativeName} />
               </S.Item>
               <S.Item>
                 <Property name="Population" value={country.population} />
@@ -62,24 +105,27 @@ const CountryPage = () => {
                 <Property name="Subregion" value={country.subregion} />
               </S.Item>
               <S.Item>
-                <Property name="Capital" value={country.capital.join(', ')} />
+                <Property name="Capital" value={country.capital} />
               </S.Item>
             </S.List>
             <S.List>
               <S.Item>
                 <Property
                   name="Top Level Domain"
-                  value={country.tld.join(', ')}
+                  value={country.topLevelDomain.join(', ')}
                 />
               </S.Item>
               <S.Item>
                 <Property
                   name="Currencies"
-                  value={country.currencies.UAH.name}
+                  value={country.currencies.join(', ')}
                 />
               </S.Item>
               <S.Item>
-                <Property name="Languages" value={country.languages.ukr} />
+                <Property
+                  name="Languages"
+                  value={country.languages.join(', ')}
+                />
               </S.Item>
             </S.List>
           </S.PropertiesWrapper>

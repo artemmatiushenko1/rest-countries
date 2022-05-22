@@ -1,10 +1,11 @@
 import Property from 'components/property/Property';
+import { IFlags } from 'interfaces/country';
 import React from 'react';
 import * as S from './CountryItem.style';
 
 interface CountryItemProps {
   name: string;
-  flag: string;
+  flags: IFlags;
   population: number;
   region: string;
   capital: string;
@@ -12,7 +13,7 @@ interface CountryItemProps {
 
 const CountryItem: React.FC<CountryItemProps> = ({
   name,
-  flag,
+  flags,
   population,
   region,
   capital,
@@ -20,7 +21,7 @@ const CountryItem: React.FC<CountryItemProps> = ({
   return (
     <S.Card>
       <S.FlagWrapper>
-        <S.FlagImg src={flag} alt="" />
+        <S.FlagImg src={flags.svg} alt="" />
       </S.FlagWrapper>
       <S.Details>
         <S.Name title={name}>{name}</S.Name>
