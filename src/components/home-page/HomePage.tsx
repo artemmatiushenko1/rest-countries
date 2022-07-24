@@ -1,11 +1,11 @@
 import { ISelectOption } from 'interfaces/select-option';
-import { ICountry } from 'interfaces/country';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import SearchInput from 'components/search-input/SearchInput';
 import { Box, SelectChangeEvent } from '@mui/material';
 import Select from 'components/select/Select';
 import CountriesList from 'components/countries-list/CountriesList';
+import { useStores } from 'hooks/use-stores';
+import { observer } from 'mobx-react-lite';
 
 const selectOptions: ISelectOption[] = [
   { value: '1', displayText: 'Africa' },
@@ -17,18 +17,13 @@ const selectOptions: ISelectOption[] = [
 
 const HomePage = () => {
   const [region, setRegion] = useState('');
-  const [allCountries, setAllCountries] = useState<ICountry[]>([]);
+  const {
+    countriesStore: { getCountries, countries: allCountries },
+  } = useStores();
 
   useEffect(() => {
-    const fetchCountries = async () => {
-      const response = await axios.get<ICountry[]>(
-        process.env.REACT_APP_API_URL as string
-      );
-      console.log(response.data);
-      setAllCountries(response.data);
-    };
-    fetchCountries();
-  }, []);
+    getCountries();
+  }, [getCountries]);
 
   return (
     <Box sx={{ paddingTop: '49px' }}>
@@ -51,4 +46,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default observer(HomePage);

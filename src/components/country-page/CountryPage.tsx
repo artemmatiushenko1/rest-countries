@@ -4,6 +4,7 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import Property from 'components/property/Property';
 import * as S from './CountryPage.style';
 import CountryLink from 'components/country-link/CountryLink';
+import { useNavigate } from 'react-router-dom';
 
 const country = {
   name: 'Afghanistan',
@@ -79,9 +80,19 @@ const country = {
 } as ICountry;
 
 const CountryPage = () => {
+  const navigate = useNavigate();
+
+  const onBackButtonClickHandler = () => {
+    navigate('/');
+  };
+
   return (
     <Box sx={{ paddingTop: '80px' }}>
-      <S.BackButton variant="contained" startIcon={<KeyboardBackspaceIcon />}>
+      <S.BackButton
+        variant="contained"
+        startIcon={<KeyboardBackspaceIcon />}
+        onClick={onBackButtonClickHandler}
+      >
         Back
       </S.BackButton>
       <S.CountryContainer>
@@ -118,13 +129,17 @@ const CountryPage = () => {
               <S.Item>
                 <Property
                   name="Currencies"
-                  value={country.currencies.join(', ')}
+                  value={country.currencies
+                    .map((value) => value.name)
+                    .join(', ')}
                 />
               </S.Item>
               <S.Item>
                 <Property
                   name="Languages"
-                  value={country.languages.join(', ')}
+                  value={country.languages
+                    .map((value) => value.name)
+                    .join(', ')}
                 />
               </S.Item>
             </S.List>
