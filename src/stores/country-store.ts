@@ -1,6 +1,6 @@
 import { ICountry } from './../interfaces/country';
 import { makeAutoObservable } from 'mobx';
-import axios from 'axios';
+import CountryService from 'services/country.service';
 
 interface ICountryStore {
   countries: ICountry[];
@@ -19,9 +19,7 @@ class CountryStore implements ICountryStore {
     this.getCountriesLoading = true;
 
     try {
-      const response = await axios.get<ICountry[]>(
-        process.env.REACT_APP_API_URL as string
-      );
+      const response = await CountryService.getAllCountries();
       this.countries = response.data;
     } catch (err) {
       console.log(err);

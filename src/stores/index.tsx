@@ -1,8 +1,7 @@
 import React, { createContext } from 'react';
 import RootStore from './root-store';
-import { IRootStore } from './root-store';
 
-export const RootStoreContext = createContext<IRootStore>(new RootStore());
+export const RootStoreContext = createContext(new RootStore());
 
 interface IRootStoreProviderProps {
   children?: React.ReactNode;

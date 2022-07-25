@@ -1,11 +1,9 @@
 import CountryStore from './country-store';
+import ThemeStore from './theme-store';
 
-export interface IRootStore {
-  countriesStore: CountryStore;
-}
-
-class RootStore implements IRootStore {
+class RootStore {
   countriesStore = new CountryStore();
+  themeStore = new ThemeStore();
 }
 
 export default RootStore;

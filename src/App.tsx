@@ -1,10 +1,11 @@
 import Layout from 'components/layout/Layout';
 import Country from 'pages/Country';
 import Home from 'pages/Home';
-import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 const App = () => {
+  console.log('render');
+
   return (
     <div className="App">
       <Routes>
