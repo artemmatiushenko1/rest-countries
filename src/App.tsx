@@ -4,14 +4,14 @@ import Home from 'pages/Home';
 import { Route, Routes } from 'react-router-dom';
 
 const App = () => {
-  console.log('render');
-
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="country" element={<Country />} />
+          <Route path="country">
+            <Route path=":countryCode" element={<Country />} />
+          </Route>
         </Route>
       </Routes>
     </div>

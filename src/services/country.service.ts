@@ -5,6 +5,9 @@ const BASE_API_URL = process.env.REACT_APP_API_URL as string;
 
 class CountryService {
   getAllCountries = () => axios.get<ICountry[]>(`${BASE_API_URL}/all`);
+
+  getCountryByCode = (code: string) =>
+    axios.get<ICountry>(`${BASE_API_URL}/alpha/${code}`);
 }
 
 export default new CountryService();

@@ -2,21 +2,17 @@ import { ICountry } from './../interfaces/country';
 import { makeAutoObservable } from 'mobx';
 import CountryService from 'services/country.service';
 
-interface ICountryStore {
-  countries: ICountry[];
-  getCountriesLoading: boolean;
-}
-
-class CountryStore implements ICountryStore {
+class CountryStore {
   countries: ICountry[] = [];
-  getCountriesLoading = false;
+  getAllCountriesLoading = false;
+  getCountryLoading = false;
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  getCountries = async () => {
-    this.getCountriesLoading = true;
+  getAllCountries = async () => {
+    this.getAllCountriesLoading = true;
 
     try {
       const response = await CountryService.getAllCountries();
@@ -24,7 +20,20 @@ class CountryStore implements ICountryStore {
     } catch (err) {
       console.log(err);
     } finally {
-      this.getCountriesLoading = false;
+      this.getAllCountriesLoading = false;
+    }
+  };
+
+  getCountry = async (code: string) => {
+    this.getCountryLoading = true;
+
+    try {
+      const response = await CountryService.getCountryByCode(code);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    } finally {
+      this.getCountryLoading = false;
     }
   };
 }

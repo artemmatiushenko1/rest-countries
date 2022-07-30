@@ -6,6 +6,7 @@ import Select from 'components/select/Select';
 import CountriesList from 'components/countries-list/CountriesList';
 import { useStores } from 'hooks/use-stores';
 import { observer } from 'mobx-react-lite';
+import Loader from 'components/loader/Loader';
 
 const selectOptions: ISelectOption[] = [
   { value: '1', displayText: 'Africa' },
@@ -18,12 +19,18 @@ const selectOptions: ISelectOption[] = [
 const HomePage = () => {
   const [region, setRegion] = useState('');
   const {
-    countriesStore: { getCountries, countries: allCountries },
+    countriesStore: {
+      getAllCountries,
+      countries: allCountries,
+      getAllCountriesLoading,
+    },
   } = useStores();
 
   useEffect(() => {
-    getCountries();
-  }, [getCountries]);
+    if (allCountries.length === 0) {
+      getAllCountries();
+    }
+  }, [getAllCountries, allCountries.length]);
 
   return (
     <Box sx={{ paddingTop: '49px' }}>
@@ -41,7 +48,11 @@ const HomePage = () => {
           }}
         />
       </Box>
-      <CountriesList countries={allCountries} />
+      {getAllCountriesLoading ? (
+        <Loader />
+      ) : (
+        <CountriesList countries={allCountries} />
+      )}
     </Box>
   );
 };

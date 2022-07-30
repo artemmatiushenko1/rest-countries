@@ -1,4 +1,5 @@
 import { styled } from '@mui/system';
+import { Link as RouterLink } from 'react-router-dom';
 
 export const Card = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,
@@ -12,6 +13,11 @@ export const Card = styled('div')(({ theme }) => ({
   '&:hover': {
     transform: 'translateY(-5px)',
   },
+}));
+
+export const Link = styled(RouterLink)(({ theme }) => ({
+  textDecoration: 'none',
+  color: theme.palette.text.primary,
 }));
 
 export const FlagWrapper = styled('div')(() => ({
