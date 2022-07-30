@@ -36,6 +36,19 @@ class CountryStore {
       this.getCountryLoading = false;
     }
   };
+
+  getCountriesByRegion = async (region: string) => {
+    this.getAllCountriesLoading = true;
+
+    try {
+      const response = await CountryService.getCountriesByRegion(region);
+      this.countries = response.data;
+    } catch (err) {
+      console.log(err);
+    } finally {
+      this.getAllCountriesLoading = false;
+    }
+  };
 }
 
 export default CountryStore;

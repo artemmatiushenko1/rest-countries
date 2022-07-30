@@ -7,51 +7,60 @@ import CountriesList from 'components/countries-list/CountriesList';
 import { useStores } from 'hooks/use-stores';
 import { observer } from 'mobx-react-lite';
 import Loader from 'components/loader/Loader';
+import { useSearchParams } from 'react-router-dom';
 
 const selectOptions: ISelectOption[] = [
-  { value: '1', displayText: 'Africa' },
-  { value: '2', displayText: 'America' },
-  { value: '3', displayText: 'Asia' },
-  { value: '4', displayText: 'Europe' },
-  { value: '5', displayText: 'Oceania' },
+  { value: 'africa', displayText: 'Africa' },
+  { value: 'americas', displayText: 'Americas' },
+  { value: 'asia', displayText: 'Asia' },
+  { value: 'europe', displayText: 'Europe' },
+  { value: 'oceania', displayText: 'Oceania' },
 ];
 
 const HomePage = () => {
-  const [region, setRegion] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [region, setRegion] = useState(searchParams.get('region') || '');
   const {
     countriesStore: {
+      countries,
       getAllCountries,
-      countries: allCountries,
       getAllCountriesLoading,
+      getCountriesByRegion,
     },
   } = useStores();
 
   useEffect(() => {
-    if (allCountries.length === 0) {
+    if (countries.length === 0 && !region) {
       getAllCountries();
     }
-  }, [getAllCountries, allCountries.length]);
+
+    if (region && countries.length === 0) {
+      getCountriesByRegion(region);
+    }
+  }, []);
+
+  const onRegionChangeHandler = (e: SelectChangeEvent<typeof region>) => {
+    const regionValue = e.target.value;
+    setRegion(regionValue);
+    setSearchParams({ region: regionValue });
+    getCountriesByRegion(regionValue);
+  };
 
   return (
     <Box sx={{ paddingTop: '49px' }}>
-      <Box
-        sx={{ display: 'flex', justifyContent: 'space-between' }}
-        className="toolbar"
-      >
+      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <SearchInput value="" onChange={() => {}} />
         <Select
           options={selectOptions}
           placeholder="Filter by Region"
           value={region}
-          onChange={(e: SelectChangeEvent<typeof region>) => {
-            setRegion(e.target.value);
-          }}
+          onChange={onRegionChangeHandler}
         />
       </Box>
       {getAllCountriesLoading ? (
         <Loader />
       ) : (
-        <CountriesList countries={allCountries} />
+        <CountriesList countries={countries} />
       )}
     </Box>
   );
