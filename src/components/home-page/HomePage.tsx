@@ -1,13 +1,13 @@
 import { ISelectOption } from 'interfaces/select-option';
-import { useState, useEffect } from 'react';
-import SearchInput from 'components/search-input/SearchInput';
-import { Box, SelectChangeEvent } from '@mui/material';
-import Select from 'components/select/Select';
-import CountriesList from 'components/countries-list/CountriesList';
-import { useStores } from 'hooks/use-stores';
-import { observer } from 'mobx-react-lite';
-import Loader from 'components/loader/Loader';
 import { useSearchParams } from 'react-router-dom';
+import { useStores } from 'hooks/use-stores';
+import { useState, useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
+import { SearchInput } from 'components/search-input';
+import { Box, SelectChangeEvent } from '@mui/material';
+import { Select } from 'components/select';
+import { CountriesList } from 'components/countries-list';
+import { Loader } from 'components/loader';
 
 const selectOptions: ISelectOption[] = [
   { value: 'africa', displayText: 'Africa' },
@@ -20,12 +20,14 @@ const selectOptions: ISelectOption[] = [
 const HomePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [region, setRegion] = useState(searchParams.get('region') || '');
+  const [searchValue, setSearchValue] = useState('');
   const {
     countriesStore: {
       countries,
       getAllCountries,
       getAllCountriesLoading,
       getCountriesByRegion,
+      getCountriesByName,
     },
   } = useStores();
 
@@ -39,6 +41,18 @@ const HomePage = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (searchValue) {
+      const debounceTimerId = setTimeout(() => {
+        getCountriesByName(searchValue);
+      }, 1500);
+
+      return () => {
+        clearTimeout(debounceTimerId);
+      };
+    }
+  }, [searchValue]);
+
   const onRegionChangeHandler = (e: SelectChangeEvent<typeof region>) => {
     const regionValue = e.target.value;
     setRegion(regionValue);
@@ -46,10 +60,19 @@ const HomePage = () => {
     getCountriesByRegion(regionValue);
   };
 
+  const onSearchInputChangeHandler = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setSearchValue(e.target.value);
+  };
+
   return (
     <Box sx={{ paddingTop: '49px' }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <SearchInput value="" onChange={() => {}} />
+        <SearchInput
+          value={searchValue}
+          onChange={onSearchInputChangeHandler}
+        />
         <Select
           options={selectOptions}
           placeholder="Filter by Region"

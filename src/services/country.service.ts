@@ -11,6 +11,9 @@ class CountryService {
 
   getCountriesByRegion = (region: string) =>
     axios.get<ICountry[]>(`${BASE_API_URL}/region/${region}`);
+
+  getCountriesByName = (name: string) =>
+    axios.get<ICountry[]>(`${BASE_API_URL}/name/${name}`);
 }
 
 export default new CountryService();

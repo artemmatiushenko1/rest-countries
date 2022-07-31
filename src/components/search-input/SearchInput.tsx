@@ -5,7 +5,7 @@ import { InputAdornment } from '@mui/material';
 
 interface IInputProps {
   value: string;
-  onChange: () => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const SearchInput: React.FC<IInputProps> = ({ value, onChange }) => {

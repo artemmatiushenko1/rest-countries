@@ -30,7 +30,7 @@ const CountryPage = () => {
     navigate(-1);
   };
 
-  if (getCountryLoading) return <Loader />;
+  if (getCountryLoading || !country) return <Loader />;
 
   return (
     <Box sx={{ paddingTop: '80px' }}>
