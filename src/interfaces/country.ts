@@ -31,3 +31,8 @@ export interface ICountry {
   languages: ILanguage[];
   borders: string[];
 }
+
+export interface IBorder {
+  name: string;
+  alpha3Code: string;
+}

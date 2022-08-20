@@ -13,19 +13,21 @@ import CountryPagePlaceholder from './CountryPagePlaceholder';
 
 const CountryPage = () => {
   const navigate = useNavigate();
-  const {
-    countriesStore: { getCountry, getCountryLoading },
-  } = useStores();
+  const [country, setCountry] = useState<ICountry>();
+
   const { countryCode } = useParams<{ countryCode: string }>() as {
     countryCode: string;
   };
-  const [country, setCountry] = useState<ICountry>();
+
+  const {
+    countriesStore: { getCountry, getCountryLoading, borderCountries },
+  } = useStores();
 
   useEffect(() => {
     getCountry(countryCode).then((data) => {
       setCountry(data);
     });
-  }, [getCountry, countryCode]);
+  }, [countryCode]);
 
   const onBackButtonClickHandler = () => {
     navigate(-1);
@@ -56,7 +58,10 @@ const CountryPage = () => {
                   <Property name="Native name" value={country?.nativeName!} />
                 </S.Item>
                 <S.Item>
-                  <Property name="Population" value={country?.population!} />
+                  <Property
+                    name="Population"
+                    value={new Intl.NumberFormat().format(country?.population!)}
+                  />
                 </S.Item>
                 <S.Item>
                   <Property name="Region" value={country?.region!} />
@@ -98,9 +103,9 @@ const CountryPage = () => {
             <S.NeighborCountries>
               <p>Border Countries:</p>
               <div>
-                {country?.borders?.map((border) => (
-                  <CountryLink key={border} to={`/country/${border}`}>
-                    {border}
+                {borderCountries.map(({ name, alpha3Code }) => (
+                  <CountryLink key={alpha3Code} to={`/country/${alpha3Code}`}>
+                    {name}
                   </CountryLink>
                 ))}
               </div>

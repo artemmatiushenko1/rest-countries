@@ -1,9 +1,11 @@
-import { ICountry } from './../interfaces/country';
-import { makeAutoObservable } from 'mobx';
+import { ICountry, IBorder } from './../interfaces/country';
+import { makeAutoObservable, runInAction } from 'mobx';
 import CountryService from 'services/country.service';
+import { AxiosResponse } from 'axios';
 
 class CountryStore {
   countries: ICountry[] = [];
+  borderCountries: IBorder[] = [];
   getAllCountriesLoading = false;
   getCountryLoading = false;
 
@@ -16,7 +18,10 @@ class CountryStore {
 
     try {
       const response = await CountryService.getAllCountries();
-      this.countries = response.data;
+
+      runInAction(() => {
+        this.countries = response.data;
+      });
     } catch (err) {
       console.log(err);
     } finally {
@@ -29,6 +34,16 @@ class CountryStore {
 
     try {
       const response = await CountryService.getCountryByCode(code);
+
+      const borders = response.data.borders;
+      const bordersCountriesResponse = await this.getBorderCountriesNames(
+        borders
+      );
+
+      runInAction(() => {
+        this.borderCountries = bordersCountriesResponse ?? [];
+      });
+
       return response.data;
     } catch (err) {
       console.log(err);
@@ -42,7 +57,10 @@ class CountryStore {
 
     try {
       const response = await CountryService.getCountriesByRegion(region);
-      this.countries = response.data;
+
+      runInAction(() => {
+        this.countries = response.data;
+      });
     } catch (err) {
       console.log(err);
     } finally {
@@ -55,11 +73,35 @@ class CountryStore {
 
     try {
       const response = await CountryService.getCountriesByName(name);
-      this.countries = response.data;
+
+      runInAction(() => {
+        this.countries = response.data;
+      });
     } catch (err) {
       console.log(err);
     } finally {
       this.getAllCountriesLoading = false;
+    }
+  };
+
+  getBorderCountriesNames = async (countryCodes: string[]) => {
+    try {
+      const responses = await Promise.allSettled(
+        countryCodes.map((code) => CountryService.getCountryByCode(code))
+      );
+
+      const borderCountries = (
+        responses.filter(
+          (res) => res.status === 'fulfilled'
+        ) as PromiseFulfilledResult<AxiosResponse<ICountry>>[]
+      ).map((res) => res.value.data);
+
+      return borderCountries?.map((country) => ({
+        name: country.name,
+        alpha3Code: country.alpha3Code,
+      }));
+    } catch (err) {
+      console.log(err);
     }
   };
 }

@@ -30,7 +30,10 @@ const CountryItem: React.FC<CountryItemProps> = ({
           <S.Name title={name}>{name}</S.Name>
           <S.List>
             <S.Item>
-              <Property name="Population" value={population} />
+              <Property
+                name="Population"
+                value={new Intl.NumberFormat().format(population)}
+              />
             </S.Item>
             <S.Item>
               <Property name="Region" value={region} />
