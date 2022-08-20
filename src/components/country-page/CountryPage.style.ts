@@ -11,16 +11,18 @@ export const BackButton = styled(Button)(({ theme }) => ({
 
 export const Details = styled('div')(() => ({
   flex: '50%',
+  alignSelf: 'flex-start',
+  marginTop: '40px',
 }));
 
 export const Name = styled('h2')(() => ({
   fontSize: '30px',
+  marginBottom: '25px',
 }));
 
 export const List = styled('ul')(() => {
   return {
     listStyle: 'none',
-    paddingTop: '13px',
   };
 });
 
@@ -28,7 +30,7 @@ export const Item = styled('li')(() => {
   return {
     fontSize: '16px',
     '&:not(:last-child)': {
-      marginBottom: '3px',
+      marginBottom: '8px',
     },
   };
 });
@@ -46,7 +48,7 @@ export const CountryContainer = styled('div')(() => ({
   display: 'flex',
   marginTop: '80px',
   columnGap: '122px',
-  alignItems: 'center',
+  alignItems: 'flex-start',
   justifyContent: 'flex-start',
 }));
 
@@ -59,7 +61,7 @@ export const NeighborCountries = styled('div')(() => ({
   display: 'flex',
   flexWrap: 'wrap',
   flexDirection: 'row',
-  marginTop: '85px',
+  marginTop: '75px',
   p: {
     marginRight: '10px',
     fontWeight: '600',
