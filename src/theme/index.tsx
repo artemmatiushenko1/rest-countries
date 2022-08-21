@@ -18,10 +18,11 @@ const ThemeConfig: React.FC<ThemeConfigProps> = ({ children }) => {
   const {
     themeStore: { theme: themeMode },
   } = useStores();
+
   const themeOptions = useMemo(
     () => ({
-      components: overrides,
       typography,
+      components: overrides,
       palette: themeMode === THEMES.DARK ? darkPalette : lightPalette,
     }),
     [themeMode]
