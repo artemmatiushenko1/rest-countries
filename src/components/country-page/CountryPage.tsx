@@ -7,7 +7,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useStores } from 'hooks/use-stores';
 import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
-// import { Loader } from 'components/loader';
 import { ICountry } from 'interfaces/country';
 import CountryPagePlaceholder from './CountryPagePlaceholder';
 
@@ -32,8 +31,6 @@ const CountryPage = () => {
   const onBackButtonClickHandler = () => {
     navigate(-1);
   };
-
-  // if (getCountryLoading || !country) return <Loader />;
 
   return (
     <Box sx={{ paddingTop: '80px' }}>

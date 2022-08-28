@@ -7,7 +7,6 @@ import { SearchInput } from 'components/search-input';
 import { Box, SelectChangeEvent } from '@mui/material';
 import { Select } from 'components/select';
 import { CountriesList } from 'components/countries-list';
-import { Loader } from 'components/loader';
 
 const selectOptions: ISelectOption[] = [
   { value: 'africa', displayText: 'Africa' },
@@ -23,11 +22,13 @@ const HomePage = () => {
   const [searchValue, setSearchValue] = useState('');
   const {
     countriesStore: {
-      countries,
       getAllCountries,
+      loadMoreCountries,
       getAllCountriesLoading,
       getCountriesByRegion,
       getCountriesByName,
+      hasMoreCountries,
+      countriesPagination: { items: countries },
     },
   } = useStores();
 
@@ -80,11 +81,12 @@ const HomePage = () => {
           onChange={onRegionChangeHandler}
         />
       </Box>
-      {getAllCountriesLoading ? (
-        <Loader />
-      ) : (
-        <CountriesList countries={countries} />
-      )}
+      <CountriesList
+        loadMore={loadMoreCountries}
+        loading={getAllCountriesLoading}
+        hasMore={hasMoreCountries}
+        countries={countries}
+      />
     </Box>
   );
 };

@@ -7,4 +7,5 @@ export const Grid = styled('div')(() => ({
   rowGap: '75px',
   columnGap: '73px',
   paddingTop: '47px',
+  paddingBottom: '40px',
 }));

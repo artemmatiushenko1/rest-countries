@@ -12,40 +12,35 @@ interface CountryItemProps {
   to: string;
 }
 
-const CountryItem: React.FC<CountryItemProps> = ({
-  name,
-  flags,
-  population,
-  region,
-  capital,
-  to,
-}) => {
-  return (
-    <S.Card>
-      <S.Link to={to} style={{ textDecoration: 'none' }}>
-        <S.FlagWrapper>
-          <S.FlagImg src={flags.svg} alt="" />
-        </S.FlagWrapper>
-        <S.Details>
-          <S.Name title={name}>{name}</S.Name>
-          <S.List>
-            <S.Item>
-              <Property
-                name="Population"
-                value={new Intl.NumberFormat().format(population)}
-              />
-            </S.Item>
-            <S.Item>
-              <Property name="Region" value={region} />
-            </S.Item>
-            <S.Item>
-              <Property name="Capital" value={capital} />
-            </S.Item>
-          </S.List>
-        </S.Details>
-      </S.Link>
-    </S.Card>
-  );
-};
+const CountryItem = React.forwardRef<HTMLDivElement, CountryItemProps>(
+  ({ name, flags, population, region, capital, to }, ref) => {
+    return (
+      <S.Card ref={ref}>
+        <S.Link to={to} style={{ textDecoration: 'none' }}>
+          <S.FlagWrapper>
+            <S.FlagImg src={flags.svg} alt="" />
+          </S.FlagWrapper>
+          <S.Details>
+            <S.Name title={name}>{name}</S.Name>
+            <S.List>
+              <S.Item>
+                <Property
+                  name="Population"
+                  value={new Intl.NumberFormat().format(population)}
+                />
+              </S.Item>
+              <S.Item>
+                <Property name="Region" value={region} />
+              </S.Item>
+              <S.Item>
+                <Property name="Capital" value={capital} />
+              </S.Item>
+            </S.List>
+          </S.Details>
+        </S.Link>
+      </S.Card>
+    );
+  }
+);
 
 export default CountryItem;
