@@ -68,17 +68,43 @@ const HomePage = () => {
   };
 
   return (
-    <Box sx={{ paddingTop: '49px' }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+    <Box
+      sx={{
+        paddingTop: '49px',
+        '@media (max-width: 1340px)': {
+          padding: '49px 30px 0 30px',
+        },
+      }}
+    >
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          gap: '20px',
+          '@media (max-width: 600px)': {
+            flexDirection: 'column',
+          },
+        }}
+      >
         <SearchInput
           value={searchValue}
           onChange={onSearchInputChangeHandler}
+          sx={{
+            '@media (max-width: 600px)': {
+              maxWidth: 'initial',
+            },
+          }}
         />
         <Select
           options={selectOptions}
           placeholder="Filter by Region"
           value={region}
           onChange={onRegionChangeHandler}
+          sx={{
+            '@media (max-width: 600px)': {
+              maxWidth: 'initial',
+            },
+          }}
         />
       </Box>
       <CountriesList

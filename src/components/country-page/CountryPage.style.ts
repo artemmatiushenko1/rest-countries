@@ -13,6 +13,7 @@ export const Details = styled('div')(() => ({
   flex: '50%',
   alignSelf: 'flex-start',
   marginTop: '40px',
+  width: '100%',
 }));
 
 export const Name = styled('h2')(() => ({
@@ -23,6 +24,9 @@ export const Name = styled('h2')(() => ({
 export const List = styled('ul')(() => {
   return {
     listStyle: 'none',
+    '@media (max-width: 1140px)': {
+      flex: 1,
+    },
   };
 });
 
@@ -50,11 +54,27 @@ export const CountryContainer = styled('div')(() => ({
   columnGap: '122px',
   alignItems: 'flex-start',
   justifyContent: 'flex-start',
+  paddingBottom: '20px',
+  '@media (max-width: 1140px)': {
+    flexDirection: 'column',
+    marginTop: '40px',
+  },
 }));
 
 export const PropertiesWrapper = styled('div')(() => ({
   display: 'flex',
   justifyContent: 'space-between',
+  '&:first-child': {
+    marginRight: '',
+  },
+  '@media (max-width: 1140px)': {
+    justifyContent: 'flex-start',
+    columnGap: '25vw',
+  },
+  '@media (max-width: 500px)': {
+    flexDirection: 'column',
+    rowGap: '20px',
+  },
 }));
 
 export const NeighborCountries = styled('div')(() => ({
@@ -71,5 +91,8 @@ export const NeighborCountries = styled('div')(() => ({
     display: 'flex',
     flexWrap: 'wrap',
     gap: '10px',
+  },
+  '@media (max-width: 1140px)': {
+    marginTop: '40px',
   },
 }));

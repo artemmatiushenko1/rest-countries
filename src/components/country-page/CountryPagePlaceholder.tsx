@@ -4,7 +4,16 @@ import * as S from './CountryPage.style';
 const CountryPagePlaceholder = () => {
   return (
     <S.CountryContainer>
-      <Box sx={{ maxWidth: '560px', width: '100%', height: 400 }}>
+      <Box
+        sx={{
+          maxWidth: '560px',
+          width: '100%',
+          height: 400,
+          '@media (max-width: 600px)': {
+            height: 300,
+          },
+        }}
+      >
         <Skeleton
           sx={{ width: '100%' }}
           height="100%"
@@ -19,7 +28,11 @@ const CountryPagePlaceholder = () => {
           animation="wave"
           component={'h2'}
         />
-        <S.PropertiesWrapper sx={{ columnGap: '80px' }}>
+        <S.PropertiesWrapper
+          sx={{
+            columnGap: '80px',
+          }}
+        >
           <Box
             sx={{
               flex: 1,

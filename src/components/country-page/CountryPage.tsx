@@ -33,7 +33,14 @@ const CountryPage = () => {
   };
 
   return (
-    <Box sx={{ paddingTop: '80px' }}>
+    <Box
+      sx={{
+        paddingTop: '80px',
+        '@media (max-width: 1340px)': {
+          padding: '60px 30px 0 30px',
+        },
+      }}
+    >
       <S.BackButton
         variant="contained"
         startIcon={<KeyboardBackspaceIcon />}
@@ -41,7 +48,7 @@ const CountryPage = () => {
       >
         Back
       </S.BackButton>
-      {(getCountryLoading || !country) && <CountryPagePlaceholder />}
+      {<CountryPagePlaceholder />}
       {!getCountryLoading && country && (
         <S.CountryContainer>
           <S.FlagWrapper>

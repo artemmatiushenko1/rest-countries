@@ -6,11 +6,11 @@ const Layout = () => {
   return (
     <>
       <Header />
-      <Container>
-        <main>
+      <main>
+        <Container>
           <Outlet />
-        </main>
-      </Container>
+        </Container>
+      </main>
     </>
   );
 };

@@ -3,6 +3,7 @@ import {
   Select as MuiSelect,
   MenuItem,
   SelectChangeEvent,
+  SxProps,
 } from '@mui/material';
 import { useTheme } from '@mui/system';
 import { ISelectOption } from 'interfaces/select-option';
@@ -14,6 +15,7 @@ interface ISelectProps {
   placeholder: string;
   value: string;
   onChange: (e: SelectChangeEvent) => void;
+  sx?: SxProps;
 }
 
 const Select: FC<ISelectProps> = ({
@@ -21,6 +23,7 @@ const Select: FC<ISelectProps> = ({
   placeholder,
   value,
   onChange,
+  sx,
 }) => {
   const { palette } = useTheme();
 
@@ -49,6 +52,7 @@ const Select: FC<ISelectProps> = ({
           },
         },
       }}
+      sx={sx}
     >
       {options.map((option) => {
         return (
