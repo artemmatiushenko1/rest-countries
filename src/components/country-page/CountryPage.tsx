@@ -48,7 +48,7 @@ const CountryPage = () => {
       >
         Back
       </S.BackButton>
-      {<CountryPagePlaceholder />}
+      {(getCountryLoading || !country) && <CountryPagePlaceholder />}
       {!getCountryLoading && country && (
         <S.CountryContainer>
           <S.FlagWrapper>
