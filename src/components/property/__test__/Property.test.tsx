@@ -2,18 +2,20 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { Property } from 'components/property';
 
-test('should correctly render Property value', () => {
-  render(<Property name="Native name" value="Україна" />);
+describe('test Property component', () => {
+  test('should correctly render Property value', () => {
+    render(<Property name="Native name" value="Україна" />);
 
-  const paragraphElement = screen.getByText(/Україна/i);
+    const paragraphElement = screen.getByText(/Україна/i);
 
-  expect(paragraphElement).toBeInTheDocument();
-});
+    expect(paragraphElement).toBeInTheDocument();
+  });
 
-test('should correctly render Property name', () => {
-  render(<Property name="Native name" value="Україна" />);
+  test('should correctly render Property name', () => {
+    render(<Property name="Native name" value="Україна" />);
 
-  const paragraphElement = screen.getByText(/Native name/i);
+    const paragraphElement = screen.getByText(/Native name/i);
 
-  expect(paragraphElement).toBeInTheDocument();
+    expect(paragraphElement).toBeInTheDocument();
+  });
 });

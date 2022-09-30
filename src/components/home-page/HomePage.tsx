@@ -28,7 +28,7 @@ const HomePage = () => {
       getCountriesByRegion,
       getCountriesByName,
       hasMoreCountries,
-      countriesPagination: { items: countries },
+      countriesPagination: { currentItems: countries },
     },
   } = useStores();
 
