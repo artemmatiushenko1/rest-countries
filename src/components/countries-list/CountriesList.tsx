@@ -4,6 +4,7 @@ import { ICountry } from 'interfaces/country';
 import * as S from './CountriesList.style';
 import { Loader } from 'components/loader';
 import { useInfiniteScroll } from 'hooks/use-infinite-scroll';
+import { toJS } from 'mobx';
 
 interface CountriesListProps {
   countries: ICountry[];
@@ -19,6 +20,7 @@ const CountriesList: React.FC<CountriesListProps> = ({
   hasMore,
 }) => {
   const { ref } = useInfiniteScroll(loading, hasMore, loadMore);
+  // console.log(toJS(countries), { hasMore });
 
   return (
     <>

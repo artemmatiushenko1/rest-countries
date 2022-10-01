@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 import { Property } from 'components/property';
 
 describe('test Property component', () => {
-  test('should correctly render Property value', () => {
+  it('should correctly render Property value', () => {
     render(<Property name="Native name" value="Україна" />);
 
     const paragraphElement = screen.getByText(/Україна/i);
@@ -11,7 +11,7 @@ describe('test Property component', () => {
     expect(paragraphElement).toBeInTheDocument();
   });
 
-  test('should correctly render Property name', () => {
+  it('should correctly render Property name', () => {
     render(<Property name="Native name" value="Україна" />);
 
     const paragraphElement = screen.getByText(/Native name/i);

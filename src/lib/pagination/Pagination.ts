@@ -27,17 +27,17 @@ class Pagination<T> {
     this.take = take;
     this.totalItems = items.length;
     this.allItems = [...items];
-    this.currentItems = items.slice(skip, take);
+    this.currentItems = [...items].splice(skip, take);
     this.totalPages = Math.ceil(items.length / take);
-    this.hasMore = [...items].splice(skip + take, take).length > 0;
+    this.hasMore = [...items].splice(skip, take).length > 0;
   }
 
-  getNextPage() {
+  goToNextPage() {
+    if (this.currentPage === this.totalPages) return;
+
     this.currentPage = this.currentPage + 1;
     this.skip = this.skip + this.take;
-    this.currentItems = this.currentItems.concat(
-      [...this.allItems].splice(this.skip, this.take)
-    );
+    this.currentItems = [...this.allItems].splice(this.skip, this.take);
     this.hasMore =
       [...this.allItems].splice(this.skip + this.take, this.take).length > 0;
   }

@@ -1,5 +1,5 @@
 import { ICountry, IBorder } from './../interfaces/country';
-import { makeAutoObservable, runInAction } from 'mobx';
+import { makeAutoObservable, runInAction, toJS } from 'mobx';
 import CountryService from 'services/country.service';
 import { AxiosResponse } from 'axios';
 import { Pagination } from 'lib/pagination';
@@ -27,10 +27,13 @@ class CountryStore {
       const response = await CountryService.getAllCountries();
 
       runInAction(() => {
-        this.countries = response.data;
         this.countriesPagination.setInitialPagination({
           items: response.data,
         });
+        this.countries = [
+          ...this.countries,
+          ...this.countriesPagination.currentItems,
+        ];
       });
     } catch (err) {
       console.log(err);
@@ -43,7 +46,13 @@ class CountryStore {
     this.getAllCountriesLoading = true;
 
     try {
-      this.countriesPagination.getNextPage();
+      runInAction(() => {
+        this.countriesPagination.goToNextPage();
+        this.countries = [
+          ...this.countries,
+          ...this.countriesPagination.currentItems,
+        ];
+      });
     } catch (err) {
       console.log(err);
     } finally {
@@ -86,9 +95,13 @@ class CountryStore {
       const response = await CountryService.getCountriesByRegion(region);
 
       runInAction(() => {
-        this.countries = response.data;
         this.countriesPagination.setInitialPagination({ items: response.data });
+        this.countries = [
+          ...this.countries,
+          ...this.countriesPagination.currentItems,
+        ];
       });
+      console.log(toJS(this.countriesPagination));
     } catch (err) {
       console.log(err);
     } finally {
@@ -103,8 +116,11 @@ class CountryStore {
       const response = await CountryService.getCountriesByName(name);
 
       runInAction(() => {
-        this.countries = response.data;
         this.countriesPagination.setInitialPagination({ items: response.data });
+        this.countries = [
+          ...this.countries,
+          ...this.countriesPagination.currentItems,
+        ];
       });
     } catch (err) {
       console.log(err);
