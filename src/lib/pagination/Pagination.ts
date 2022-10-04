@@ -29,7 +29,10 @@ class Pagination<T> {
     this.allItems = [...items];
     this.currentItems = [...items].splice(skip, take);
     this.totalPages = Math.ceil(items.length / take);
-    this.hasMore = [...items].splice(skip, take).length > 0;
+
+    this.hasMore =
+      [...items].splice(skip, take).length > 0 &&
+      this.currentPage !== this.totalPages;
   }
 
   goToNextPage() {

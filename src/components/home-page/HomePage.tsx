@@ -31,7 +31,6 @@ const HomePage = () => {
       countries,
     },
   } = useStores();
-  // console.log(countries);
 
   useEffect(() => {
     if (countries.length === 0 && !region) {

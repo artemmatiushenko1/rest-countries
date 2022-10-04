@@ -30,10 +30,7 @@ class CountryStore {
         this.countriesPagination.setInitialPagination({
           items: response.data,
         });
-        this.countries = [
-          ...this.countries,
-          ...this.countriesPagination.currentItems,
-        ];
+        this.countries = [...this.countriesPagination.currentItems];
       });
     } catch (err) {
       console.log(err);
@@ -96,10 +93,7 @@ class CountryStore {
 
       runInAction(() => {
         this.countriesPagination.setInitialPagination({ items: response.data });
-        this.countries = [
-          ...this.countries,
-          ...this.countriesPagination.currentItems,
-        ];
+        this.countries = [...this.countriesPagination.currentItems];
       });
       console.log(toJS(this.countriesPagination));
     } catch (err) {
@@ -117,10 +111,7 @@ class CountryStore {
 
       runInAction(() => {
         this.countriesPagination.setInitialPagination({ items: response.data });
-        this.countries = [
-          ...this.countries,
-          ...this.countriesPagination.currentItems,
-        ];
+        this.countries = [...this.countriesPagination.currentItems];
       });
     } catch (err) {
       console.log(err);

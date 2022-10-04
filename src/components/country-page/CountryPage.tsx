@@ -35,7 +35,7 @@ const CountryPage = () => {
   return (
     <Box
       sx={{
-        paddingTop: '80px',
+        paddingTop: '49px',
         '@media (max-width: 1340px)': {
           padding: '60px 30px 0 30px',
         },

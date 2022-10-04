@@ -104,4 +104,13 @@ describe('test Pagination class', () => {
 
     expect(pagination.totalPages).toEqual(expectedNumberOfPages);
   });
+
+  it('should have correct hasMore if number of totalItems is less than take', () => {
+    const pagination = new Pagination<ICountry>({
+      items: [...countries].splice(0, 10),
+      take: 20,
+    });
+
+    expect(pagination.hasMore).toEqual(false);
+  });
 });
