@@ -1,15 +1,14 @@
-import React from 'react';
+import React, { FC, ChangeEvent } from 'react';
 import * as S from './SearchInput.style';
 import SearchIcon from '@mui/icons-material/Search';
-import { InputAdornment, SxProps } from '@mui/material';
+import { InputAdornment } from '@mui/material';
 
-interface IInputProps {
+type IInputProps = {
   value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  sx?: SxProps;
-}
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+};
 
-const SearchInput: React.FC<IInputProps> = ({ value, onChange, sx }) => {
+const SearchInput: FC<IInputProps> = ({ onChange, value }) => {
   return (
     <S.Input
       type="text"
@@ -24,7 +23,11 @@ const SearchInput: React.FC<IInputProps> = ({ value, onChange, sx }) => {
       onChange={onChange}
       variant="outlined"
       placeholder="Search for a country..."
-      sx={sx}
+      sx={{
+        '@media (max-width: 600px)': {
+          maxWidth: 'initial',
+        },
+      }}
     />
   );
 };

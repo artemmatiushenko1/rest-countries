@@ -1,7 +1,6 @@
 import { ISelectOption } from 'interfaces/select-option';
-import { useSearchParams } from 'react-router-dom';
 import { useStores } from 'hooks/use-stores';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 import { observer } from 'mobx-react-lite';
 import { SearchInput } from 'components/search-input';
 import { Box, SelectChangeEvent } from '@mui/material';
@@ -17,9 +16,10 @@ const selectOptions: ISelectOption[] = [
 ];
 
 const HomePage = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [region, setRegion] = useState(searchParams.get('region') || '');
+  const [region, setRegion] = useState('');
   const [searchValue, setSearchValue] = useState('');
+  const [searchInputTouched, setSearchInputTouched] = useState(false);
+
   const {
     countriesStore: {
       getAllCountries,
@@ -43,9 +43,15 @@ const HomePage = () => {
   }, []);
 
   useEffect(() => {
-    if (searchValue) {
+    if (searchInputTouched) {
       const debounceTimerId = setTimeout(() => {
-        getCountriesByName(searchValue);
+        if (region) return;
+
+        if (searchValue === '' && !region) {
+          getAllCountries();
+        } else {
+          getCountriesByName(searchValue);
+        }
       }, 1500);
 
       return () => {
@@ -55,16 +61,19 @@ const HomePage = () => {
   }, [searchValue]);
 
   const onRegionChangeHandler = (e: SelectChangeEvent<typeof region>) => {
+    setSearchValue('');
+
     const regionValue = e.target.value;
     setRegion(regionValue);
-    setSearchParams({ region: regionValue });
     getCountriesByRegion(regionValue);
   };
 
-  const onSearchInputChangeHandler = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setSearchValue(e.target.value);
+  const onSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setRegion('');
+    if (!searchInputTouched) {
+      setSearchInputTouched(true);
+    }
+    setSearchValue(e.target.value.trim());
   };
 
   return (
@@ -86,15 +95,7 @@ const HomePage = () => {
           },
         }}
       >
-        <SearchInput
-          value={searchValue}
-          onChange={onSearchInputChangeHandler}
-          sx={{
-            '@media (max-width: 600px)': {
-              maxWidth: 'initial',
-            },
-          }}
-        />
+        <SearchInput value={searchValue} onChange={onSearchInputChange} />
         <Select
           options={selectOptions}
           placeholder="Filter by Region"
