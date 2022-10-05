@@ -1,8 +1,8 @@
-import { makeAutoObservable } from 'mobx';
+import { autorun, makeAutoObservable } from 'mobx';
 
 export enum THEMES {
-  DARK,
-  LIGHT,
+  DARK = 'dark',
+  LIGHT = 'light',
 }
 
 class ThemeStore {
@@ -10,15 +10,26 @@ class ThemeStore {
 
   constructor() {
     makeAutoObservable(this);
+    this.getThemeFromLS();
+
+    autorun(() => {
+      this.saveThemeToLS();
+    });
   }
 
   toggleTheme = () => {
-    if (this.theme === THEMES.LIGHT) {
-      this.theme = THEMES.DARK;
-    } else {
-      this.theme = THEMES.LIGHT;
-    }
+    this.theme = this.theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT;
   };
+
+  getThemeFromLS() {
+    const theme = localStorage.getItem('theme');
+    if (!theme) return;
+    this.theme = JSON.parse(theme);
+  }
+
+  saveThemeToLS() {
+    localStorage.setItem('theme', JSON.stringify(this.theme));
+  }
 }
 
 export default ThemeStore;
