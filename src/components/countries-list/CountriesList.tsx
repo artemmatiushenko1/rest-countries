@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import CountryItem from 'components/country-item/CountryItem';
 import { ICountry } from 'interfaces/country';
 import * as S from './CountriesList.style';
@@ -57,4 +57,4 @@ const CountriesList: React.FC<CountriesListProps> = ({
   );
 };
 
-export default CountriesList;
+export default memo(CountriesList);
