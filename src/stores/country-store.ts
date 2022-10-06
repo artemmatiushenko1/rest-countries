@@ -3,9 +3,9 @@ import { makeAutoObservable, runInAction, toJS } from 'mobx';
 import CountryService from 'services/country.service';
 import { AxiosResponse } from 'axios';
 import { Pagination } from 'lib/pagination';
+import { Alert } from 'lib/alert';
 
 class CountryStore {
-  // add country search text
   countries: ICountry[] = [];
   countriesPagination = new Pagination<ICountry>({
     items: [],
@@ -33,7 +33,7 @@ class CountryStore {
         this.countries = [...this.countriesPagination.currentItems];
       });
     } catch (err) {
-      console.log(err);
+      Alert.addMessage('Something went wrong', 'error');
     } finally {
       this.getAllCountriesLoading = false;
     }
@@ -51,7 +51,7 @@ class CountryStore {
         ];
       });
     } catch (err) {
-      console.log(err);
+      Alert.addMessage('Something went wrong', 'error');
     } finally {
       this.getAllCountriesLoading = false;
     }
@@ -79,7 +79,7 @@ class CountryStore {
 
       return response.data;
     } catch (err) {
-      console.log(err);
+      Alert.addMessage('Something went wrong', 'error');
     } finally {
       this.getCountryLoading = false;
     }
@@ -97,7 +97,7 @@ class CountryStore {
       });
       console.log(toJS(this.countriesPagination));
     } catch (err) {
-      console.log(err);
+      Alert.addMessage('Something went wrong', 'error');
     } finally {
       this.getAllCountriesLoading = false;
     }
@@ -113,8 +113,19 @@ class CountryStore {
         this.countriesPagination.setInitialPagination({ items: response.data });
         this.countries = [...this.countriesPagination.currentItems];
       });
-    } catch (err) {
-      console.log(err);
+
+      Alert.addMessage(
+        `Found ${response.data.length} countr${
+          response.data.length > 1 ? 'ies' : 'y'
+        }`,
+        'success'
+      );
+    } catch (err: any) {
+      if (err.response.status === 404) {
+        Alert.addMessage('No countries found', 'warning');
+      } else {
+        Alert.addMessage('Something went wrong', 'error');
+      }
     } finally {
       this.getAllCountriesLoading = false;
     }
@@ -137,7 +148,7 @@ class CountryStore {
         alpha3Code: country.alpha3Code,
       }));
     } catch (err) {
-      console.log(err);
+      Alert.addMessage('Something went wrong', 'error');
     }
   };
 }

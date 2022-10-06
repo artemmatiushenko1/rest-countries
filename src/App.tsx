@@ -2,6 +2,8 @@ import Layout from 'components/layout/Layout';
 import Country from 'pages/Country';
 import Home from 'pages/Home';
 import { Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   return (
@@ -14,6 +16,7 @@ const App = () => {
           </Route>
         </Route>
       </Routes>
+      <ToastContainer />
     </div>
   );
 };
